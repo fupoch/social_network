@@ -1,0 +1,21 @@
+.wrapper {
+  background-color: rgba(73, 77, 85, 0.164);
+  height: 100%;
+}
+.app_wrapper {
+  margin: 1% auto;
+  display: grid;
+  grid-template-areas: "n c";
+  width: 1200px;
+  grid-template-rows: 100%;
+  grid-template-columns: 10fr 100fr;
+  gap: 2px;
+  height: 100%;
+}
+
+.app_wrapper_content {
+  grid-area: c;
+  background-color: rgb(190, 68, 68);
+  border-radius: 5px;
+  box-shadow: 0 0 2px;
+}

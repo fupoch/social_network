@@ -1,0 +1,9 @@
+.header {
+  background-color: rgb(190, 65, 65);
+  height: 50px;
+  box-shadow: 0 0 2px;
+}
+
+.header img {
+  width: 20px;
+}
