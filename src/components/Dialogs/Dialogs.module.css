@@ -6,25 +6,72 @@
 .dialogItem {
   padding: 10px;
 }
+/* .dialogItem .active {
+  background-color: rgb(22, 190, 182);
+  border-radius: 20px;
+} */
+
+.dialogItem * {
+  min-width: 30px;
+}
+
+.dialogItem * :hover {
+  background-color: rgb(24, 77, 74);
+  border-radius: 20px;
+}
+
+.img {
+  height: 30px;
+  width: 30px;
+  border-radius: 30px;
+  margin-right: 10px;
+}
 
 .dialog {
   padding: 5px;
 }
 
-.dialogItem .active {
-  background-color: rgb(22, 190, 182);
-  border-radius: 20px;
-}
-
-.dialogItem:hover {
-  background-color: rgb(24, 77, 74);
-  border-radius: 20px;
-}
-
 .messages {
   padding: 10px;
+  overflow: auto;
+  height: 300px;
+  max-height: 300px;
+}
+
+.messages :nth-child(odd) {
+  text-align: right;
 }
 
 .message {
   padding: 5px;
+}
+
+.dialogWindow {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.textArea {
+  background-color: rgba(170, 170, 170, 0.185);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  height: 100px;
+}
+
+.dialogWindow textarea {
+  resize: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: rgba(170, 170, 170, 0);
+  width: 400px;
+  height: 60px;
+  align-self: center;
+}
+
+.buttonSend {
+  align-self: center;
 }

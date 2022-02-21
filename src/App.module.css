@@ -1,5 +1,4 @@
 .wrapper {
-  background-color: rgba(73, 77, 85, 0.164);
   height: 100%;
 }
 .app_wrapper {
@@ -8,14 +7,15 @@
   grid-template-areas: "n c";
   width: 1200px;
   grid-template-rows: 100%;
-  grid-template-columns: 10fr 100fr;
+  grid-template-columns: 26fr 100fr;
   gap: 2px;
   height: 100%;
 }
 
 .app_wrapper_content {
   grid-area: c;
-  background-color: rgb(190, 68, 68);
-  border-radius: 5px;
-  box-shadow: 0 0 2px;
+  background-color: rgba(170, 170, 170, 0.185);
+  border-radius: 7px;
+  box-shadow: 0 0 1px rgb(82, 78, 78);
+  color: white;
 }
