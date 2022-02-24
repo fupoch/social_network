@@ -6,17 +6,18 @@ import Post from "./Posts/Post";
 
 
 const MyPosts = (props) => {
+  
   let postsElement = props.posts.map(p => <Post message={p.message} likeCount={p.likeCount}/>).reverse()
 
   let newPostElement = React.createRef();
 
   let addPost = () => {
-    props.dispatch(addPostActionCreator())
+    props.addPost()
   }
  
   let onPostChange = () => {
     let text = newPostElement.current.value
-    props.dispatch(updateNewPostTextActionCreator(text))
+    props.onPostChange(text)
   }
   
   return (

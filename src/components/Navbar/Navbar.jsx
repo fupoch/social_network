@@ -6,7 +6,7 @@ import s from './Navbar.module.css'
 const Navbar = (props) => {
 
   let friendsElements = props.state.friends.map(p => 
-    <Friend name={p.name}/>
+    <Friend name={p.name} key={p.id}/>
   )
 
   return (
@@ -22,6 +22,9 @@ const Navbar = (props) => {
     </div>
     <div className={s.item}>
       <NavLink to='/music'>Music</NavLink>
+    </div>
+    <div className={s.item}>
+      <NavLink to='/users'>Users</NavLink>
     </div>
     <div className={s.item}>
       <NavLink to='/settings'>Settings</NavLink>

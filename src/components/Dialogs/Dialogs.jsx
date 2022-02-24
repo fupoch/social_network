@@ -7,19 +7,18 @@ import Message from "./Message/Message";
 
 
 const Dialogs = (props) => {
+  let  newMessageText = props.messagePage.newMessageText
   let dialogsElements = props.messagePage.dialogs.map( d => 
-    <ItemDialog name={d.name} id={d.id} />
+    <ItemDialog name={d.name} id={d.id} key={d.id} />
   )
-  let messageElements = props.messagePage.messages.map(m => <Message message={m.message}/>)
+  let messageElements = props.messagePage.messages.map(m => <Message message={m.message} key={m.id}/>)
   
-  let newMessageText = props.messagePage.newMessageText
-
   let sendMessage = () => {
-   props.dispatch(sendMessageActionCreator())
+   props.sendMessage()
   }
   let onMessageChange = (e) => {
     let text = e.target.value;
-    props.dispatch(updateNewMessageTextActionCreator(text))
+    props.onMessageChange(text)
   }
 
   return (
