@@ -1,0 +1,65 @@
+.titleUsers {
+  display: flex;
+  justify-content: center;
+}
+.selectedPage {
+  font-weight: 700;
+  color: rgb(251, 255, 4);
+}
+
+.pageCount {
+  width: 200px;
+  overflow: auto;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.pageCount span {
+  margin: 0 5px;
+}
+
+.wrapper {
+  display: flex;
+  margin: 30px 0 10px 15%;
+}
+.wrapper__avaFollow {
+  display: flex;
+  flex-direction: column;
+  width: 68px;
+  align-self: center;
+}
+.wrapper__imgAva {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 5px 0;
+}
+.wrapper__imgAva img {
+  height: 70px;
+  width: 70px;
+  border-radius: 5px;
+}
+.wrapper__followButton {
+  display: flex;
+  justify-content: center;
+}
+.wrapper__infoUser {
+  padding: 10px;
+  border: solid 1px rgb(97, 94, 94);
+  border-radius: 15px;
+  box-shadow: 0px 5px 5px -5px rgba(175, 177, 179, 0.6);
+  width: 600px;
+
+  margin: 0 0 0 30px;
+}
+.wrapper__fullName {
+  font-size: 25px;
+}
+.wrapper__status {
+}
+.wrapper__country {
+  display: flex;
+  justify-content: flex-end;
+}
+.wrapper__city {
+  display: flex;
+  justify-content: flex-end;
+}

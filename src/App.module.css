@@ -14,8 +14,8 @@
 
 .app_wrapper_content {
   grid-area: c;
-  background-color: rgba(170, 170, 170, 0.185);
   border-radius: 7px;
-  box-shadow: 0 0 1px rgb(82, 78, 78);
   color: white;
 }
+
+/* rgba(170, 170, 170, 0.185); */

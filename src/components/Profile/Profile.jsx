@@ -1,5 +1,4 @@
 import React from "react";
-import MyPosts from "./MyPosts/MyPosts";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import s from './Profile.module.css'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
@@ -7,15 +6,16 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 
 const Profile = (props) => {
-  
-
-
   return (
-    <div className='contentProfile'>
-      <ProfileInfo/>
+    <div className={s.wrapper}>
+      <div className={s.wrapper__contentProfile}>
+      <ProfileInfo profile={props.profile}/>
+      </div>
+      <div className={s.wrapper__MyPosts}>
       <MyPostsContainer 
       store={props.store}
       />
+      </div>
    </div>
   )
 }

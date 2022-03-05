@@ -1,17 +1,53 @@
 import React from "react";
+import Preloader from "../../common/preloader/Preloader";
 
 import s from './ProfileInfo.module.css'
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+
+  if (!props.profile) {
+    return <Preloader/>
+  }
+
   return (
-    <div >
-      <div>
-        <img className={s.img} src="https://thumbs.dreamstime.com/b/%D0%B1%D0%B5%D0%BB%D0%B0%D1%8F-%D1%88%D0%B8%D1%80%D0%BE%D0%BA%D0%B0%D1%8F-%D1%84%D1%83%D1%82%D1%83%D1%80%D0%B8%D1%81%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D0%B8%D0%BB%D0%BB%D1%8E%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D1%8B-d-%D1%81%D0%B0%D0%B9%D1%82%D0%B0-%D1%84%D0%BE%D0%BD%D0%B0-159442639.jpg"></img> 
+    <div className={s.wrapper}>
+      <div className={s.wrapper__ava}>
+      <img src={props.profile.photos.large}/>
       </div>
-      <div className={s.descriptionBlock}>
-        ava + descript
+      <div className={s.wrapper__info}>
+        <div className={s.wrapper__fullNameStatus}>
+          <div className={s.fullname}>
+            <h4>{props.profile.fullName}</h4>
+          </div>
+          <div className={s.status}>
+            <span>{props.profile.aboutMe}</span>
+          </div>
+          
+        </div>
+        <div className={s.wrapper__mainInfo}>
+          <div className={s.wrapper__contacts}>
+            Contacts:
+            <ul className={s.ulContacts}>
+              <li>{props.profile.contacts.facebook ? <a href="{props.profile.contacts.facebook}">facebook</a> : "Facebooka нет =("}</li>
+              <li>{props.profile.contacts.github ? <a href="{props.profile.contacts.github}"> github</a> : 'githuba нет =('}</li>
+              <li>{props.profile.contacts.vk ? <a href='{props.profile.contacts.vk}'>vk</a> : "vk нет =("}</li>
+              <li>{props.profile.contacts.twitter ? <a href="{props.profile.contacts.twitter}">twitter</a> : "twittera нет =("}</li>
+              <li>{props.profile.contacts.instagram ? <a href="{props.profile.contacts.instagram}"> instagram</a> : "instagrama нет =("}</li>
+              <li>{props.profile.contacts.youtube ? <a href="{props.profile.contacts.youtube}">youtube</a> : "youtuba нет =("}</li>
+            </ul>
+          </div>
+          <div className={s.wrapper__lookingForAJob}>
+            <div className={s.wrapper__booleanLookingForAjob}>
+            {props.profile.lookingForAJob ? 'Ищу работу' : null}
+            </div>
+            <div className={s.wrapper__descriptionLookingForAjob}>
+            {props.profile.lookingForAJobDescription}
+            </div>
+          </div>
+        </div>
       </div>
-   </div>
+    </div>
+
   )
 }
 

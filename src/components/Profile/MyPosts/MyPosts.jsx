@@ -1,5 +1,5 @@
 import React from "react";
-import { addPostActionCreator, updateNewPostTextActionCreator } from "../../../redux/profileReducer";
+
 import s from './MyPosts.module.css'
 import Post from "./Posts/Post";
 
@@ -8,13 +8,10 @@ import Post from "./Posts/Post";
 const MyPosts = (props) => {
   
   let postsElement = props.posts.map(p => <Post message={p.message} likeCount={p.likeCount}/>).reverse()
-
   let newPostElement = React.createRef();
-
   let addPost = () => {
     props.addPost()
   }
- 
   let onPostChange = () => {
     let text = newPostElement.current.value
     props.onPostChange(text)

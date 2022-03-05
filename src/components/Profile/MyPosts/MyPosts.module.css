@@ -1,5 +1,7 @@
 .postsBlock {
   padding: 10px;
+  background-color: rgba(170, 170, 170, 0.185);
+  border-radius: 8px;
 }
 
 .posts {
