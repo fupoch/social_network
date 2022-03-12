@@ -1,10 +1,11 @@
 import React from "react";
 import Preloader from "../../common/preloader/Preloader";
-
+import userPhoto from '../../assets/img/userPhoto.png'
 import s from './ProfileInfo.module.css'
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
-
+  
   if (!props.profile) {
     return <Preloader/>
   }
@@ -12,7 +13,7 @@ const ProfileInfo = (props) => {
   return (
     <div className={s.wrapper}>
       <div className={s.wrapper__ava}>
-      <img src={props.profile.photos.large}/>
+      <img src={props.profile.photos.large ? props.profile.photos.large : userPhoto} />
       </div>
       <div className={s.wrapper__info}>
         <div className={s.wrapper__fullNameStatus}>
@@ -20,7 +21,8 @@ const ProfileInfo = (props) => {
             <h4>{props.profile.fullName}</h4>
           </div>
           <div className={s.status}>
-            <span>{props.profile.aboutMe}</span>
+            <ProfileStatus putProfileStatus={props.putProfileStatus} status={props.status}/>
+            
           </div>
           
         </div>
