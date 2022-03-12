@@ -17,6 +17,9 @@ export const usersAPI = {
   getProfileId(userId) {
     return instance.get("profile/" + userId);
   },
+};
+
+export const authAPI = {
   loginDataGet() {
     return instance.get("auth/me");
   },

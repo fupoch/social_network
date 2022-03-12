@@ -12,7 +12,7 @@ const Navbar = (props) => {
   return (
   <nav className={s.nav}>
     <div className={s.item}>
-      <NavLink to='/profile'><span >Proffile</span></NavLink>
+      <NavLink to='/profile/22658'><span >Proffile</span></NavLink>
     </div>
     <div className={s.item}>
       <NavLink to='/dialogs'>Мессенджер</NavLink>
