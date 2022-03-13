@@ -39,11 +39,12 @@ const Login = (props) => {
   
   const onSubmit =(formData) => {
     props.signIn(formData.email, formData.password, formData.rememberMe)
-  }
-
+    
+    }
+  
   if (props.isAuth) {
   
-    return <Navigate replace
+    return <Navigate replace={'/login/'}
      to={'/profile/' + props.userId}
     // to={'/profile/*'}
      />

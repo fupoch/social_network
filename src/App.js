@@ -11,19 +11,26 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import { connect } from "react-redux";
-import { getUserLogin } from "./redux/authReducer";
+import { initializeApp } from "./redux/appReducer";
 import { compose } from "redux";
 import { withRouter } from "./components/Profile/WithRouter";
+import Preloader from "./components/common/preloader/Preloader";
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.getUserLogin();
+    this.props.initializeApp();
   }
 
   render() {
+    if (!this.props.initialized) {
+      return <Preloader />;
+    }
+
     return (
       <div className={s.wrapper}>
-        <HeaderContainer />
+        <div className={s.wrapper__header}>
+          <HeaderContainer />
+        </div>
         <div className={s.app_wrapper}>
           <Navbar className={s.navbar} state={this.props.state.siteBar} />
           <div className={s.app_wrapper_content}>
@@ -49,4 +56,11 @@ class App extends React.Component {
   }
 }
 
-export default compose(withRouter, connect(null, { getUserLogin }))(App);
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized,
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, { initializeApp })
+)(App);

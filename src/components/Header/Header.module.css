@@ -2,6 +2,7 @@
   background-color: rgba(170, 170, 170, 0.185);
   height: 50px;
   box-shadow: 0 0 1px rgb(82, 78, 78);
+  position: sticky;
 }
 
 .header img {

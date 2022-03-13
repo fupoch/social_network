@@ -5,6 +5,7 @@ import Users from './Users';
 import Preloader from '../common/preloader/Preloader';
 import { withAuthRedirect } from '../../hoc/WithAuthNavigate';
 import { compose } from 'redux';
+import { getCurrentPage, getIsFetching, getPageSize, getTotalUsersCount, getUsersSelector } from '../../redux/usersSelectors';
 
 class UsersAPIComponent extends React.Component {
     
@@ -36,17 +37,26 @@ class UsersAPIComponent extends React.Component {
   };
 }
 
+// const mapStateToProps = (state) => {
+//   return {
+//     users: state.usersPage.users,
+//     pageSize: state.usersPage.pageSize,
+//     totalUsersCount: state.usersPage.totalUsersCount,
+//     currentPage: state.usersPage.currentPage,
+//     isFetching: state.usersPage.isFetching,
+   
+//   }
+// }
 const mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
+    users: getUsersSelector(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
    
   }
 }
-
 export default compose(
   withAuthRedirect,
   connect(mapStateToProps, {

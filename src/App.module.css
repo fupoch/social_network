@@ -11,6 +11,8 @@
   gap: 2px;
   height: 100%;
 }
+.wrapper__header {
+}
 
 .app_wrapper_content {
   grid-area: c;
