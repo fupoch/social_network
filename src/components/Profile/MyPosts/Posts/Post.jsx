@@ -1,10 +1,19 @@
 import React from "react";
 import s from './Post.module.css'
+import userPhoto from '../../../assets/img/userPhoto.png'
+import Preloader from "../../../common/preloader/Preloader";
 
 const Post = (props) => {
+ 
+  if (!props.profile) {
+    return <Preloader/>
+  }
   return (
+    
     <div className={s.item}>
-      <img className={s.img} src="https://img2.akspic.ru/previews/4/9/4/6/6/166494/166494-igra_v_kalmara_squid_game-500x.jpg" />
+      <img className={s.img} 
+      src={props.profile.photos.small ? props.profile.photos.small : userPhoto}
+       />
       {props.message}
       <div>
         <span>like: </span>{props.likeCount}

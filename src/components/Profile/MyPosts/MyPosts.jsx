@@ -9,8 +9,8 @@ import Post from "./Posts/Post";
 
 
 const MyPosts = (props) => {
-  
-  let postsElement = props.posts.map(p => <Post message={p.message} likeCount={p.likeCount}/>).reverse()
+ 
+  let postsElement = props.profilePage.posts.map(p => <Post profile={props.profile} message={p.message} likeCount={p.likeCount}/>).reverse()
  
   let addPost = (values) => {
     props.addPost(values.newPostText)
