@@ -10,7 +10,8 @@ import { getCurrentPage, getIsFetching, getPageSize, getTotalUsersCount, getUser
 class UsersAPIComponent extends React.Component {
     
   componentDidMount() {
-    this.props.getUsers(this.props.pageNumber, this.props.pageSize)
+    const {pageNumber, pageSize}  = this.props
+    this.props.getUsers(pageNumber, pageSize)
   }
 
   onPageChanges = (pageNumber) => {
@@ -18,8 +19,6 @@ class UsersAPIComponent extends React.Component {
     this.props.setCurrentPage(pageNumber);
   } 
 
-
-  
   render() {
     return  <> 
     { this.props.isFetching ? <Preloader/> : null}
@@ -37,16 +36,6 @@ class UsersAPIComponent extends React.Component {
   };
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     users: state.usersPage.users,
-//     pageSize: state.usersPage.pageSize,
-//     totalUsersCount: state.usersPage.totalUsersCount,
-//     currentPage: state.usersPage.currentPage,
-//     isFetching: state.usersPage.isFetching,
-   
-//   }
-// }
 const mapStateToProps = (state) => {
   return {
     users: getUserSuperSelector(state),

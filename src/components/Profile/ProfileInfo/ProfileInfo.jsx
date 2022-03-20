@@ -2,14 +2,12 @@ import React from "react";
 import Preloader from "../../common/preloader/Preloader";
 import userPhoto from '../../assets/img/userPhoto.png'
 import s from './ProfileInfo.module.css'
-import ProfileStatus from "./ProfileStatus";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
-  console.log('render');
-  if (!props.profile) {
-    return <Preloader/>
-  }
+  // if (!props.profile) {
+  //   return <Preloader/>
+  // }
 
   return (
     <div className={s.wrapper}>
