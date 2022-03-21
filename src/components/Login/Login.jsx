@@ -34,17 +34,18 @@ const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
 const Login = (props) => {
   
-  const onSubmit =(formData) => {
+  const onSubmit = (formData) => {
     props.signIn(formData.email, formData.password, formData.rememberMe)
     }
+  
     let navigate = useNavigate()
-    useEffect(() => { if (props.isAuth) {
-      return navigate('/profile/' + props.userId)
-      // <Navigate replace={'/login/'}
-      //  to={'/profile/' + props.userId}
-    
-      //  />
-    }})
+ 
+  useEffect(() => { if (props.isAuth) {
+    return navigate('/profile/' + props.userId)
+    // <Navigate replace={'/login/'}
+    //  to={'/profile/' + props.userId}
+    //  />   
+  }}, [props.userId])
    
   
   return <div>

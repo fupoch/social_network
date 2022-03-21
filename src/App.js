@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, useEffect } from "react";
 import s from "./App.module.css";
 import Navbar from "./components/Navbar/Navbar";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
@@ -17,32 +17,37 @@ import { withRouter } from "./components/Profile/WithRouter";
 import Preloader from "./components/common/preloader/Preloader";
 import store from "./redux/reduxStore";
 
-class App extends React.Component {
-  componentDidMount() {
-    this.props.initializeApp();
+// class App extends React.Component {
+//   componentDidMount() {
+//     props.initializeApp();
+//   }
+
+const App = (props) => {
+  useEffect(() => {
+    props.initializeApp();
+  }, [props.initializeApp]);
+
+  if (!props.initialized) {
+    return <Preloader />;
   }
 
-  render() {
-    if (!this.props.initialized) {
-      return <Preloader />;
-    }
-
-    return (
-      <div className={s.wrapper}>
-        <div className={s.wrapper__header}>
-          <HeaderContainer />
-        </div>
-        <div className={s.app_wrapper}>
-          <Navbar className={s.navbar} state={this.props.state.siteBar} />
-          <div className={s.app_wrapper_content}>
+  return (
+    <div className={s.wrapper}>
+      <div className={s.wrapper__header}>
+        <HeaderContainer />
+      </div>
+      <div className={s.app_wrapper}>
+        <Navbar className={s.navbar} state={props.state.siteBar} />
+        <div className={s.app_wrapper_content}>
+          <Suspense fallback={<Preloader />}>
             <Routes>
               <Route
                 path="/dialogs"
-                element={<DialogsContainer store={this.props.store} />}
+                element={<DialogsContainer store={props.store} />}
               />
               <Route
                 path={"/profile/:userId"}
-                element={<ProfileContainer store={this.props.store} />}
+                element={<ProfileContainer store={props.store} />}
               />
               <Route path="/news" element={<News />} />
               <Route path="/music" element={<Music />} />
@@ -50,12 +55,12 @@ class App extends React.Component {
               <Route path="/settings" element={<Settings />} />
               <Route path="/login" element={<Login />} />
             </Routes>
-          </div>
+          </Suspense>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({
   initialized: state.app.initialized,
