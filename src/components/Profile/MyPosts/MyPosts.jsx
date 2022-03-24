@@ -1,3 +1,4 @@
+import { Button, TextField } from "@mui/material";
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { maxLengthCreator, required } from "../../../utils/validators/validators";
@@ -37,10 +38,11 @@ const AddPostForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
        <div>
-          <Field validate={[required, maxLength]} component={Textarea} name='newPostText' placeholder="Введите что-то"/>
+       
+          <Field validate={[required, maxLength]} component={Textarea} name='newPostText' />
         </div>
         <div>
-        <button >New post</button>
+        <Button onClick={props.handleSubmit} variant="contained" >New post</Button>
         </div>
     </form>
   )

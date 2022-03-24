@@ -67,6 +67,7 @@
   border-radius: 5px;
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 100px;
   margin: 0 0 30px 0;
 }
@@ -83,5 +84,6 @@
 }
 
 .buttonSend {
-  align-self: center;
+  align-items: center;
+  display: flex;
 }

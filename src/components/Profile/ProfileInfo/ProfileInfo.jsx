@@ -3,18 +3,51 @@ import Preloader from "../../common/preloader/Preloader";
 import userPhoto from '../../assets/img/userPhoto.png'
 import s from './ProfileInfo.module.css'
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import { Button, IconButton, Input } from "@mui/material";
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import styled from "@emotion/styled";
+
 
 const ProfileInfo = (props) => {
-  // if (!props.profile) {
-  //   return <Preloader/>
-  // }
 
+// let {editMode, setEditMode} = React.setState()
+const Input = styled('input')({
+  display: 'none',
+});
+const onMainPhotoSelected = (e) => {
+  if (e.target.files.length) {
+    props.savePhoto(e.target.files[0])
+  }
+}
   return (
     <div className={s.wrapper}>
       <div className={s.wrapper__ava}>
-      <img src={props.profile.photos.large ? props.profile.photos.large : userPhoto} />
+      <img src={props.profile.photos.large || userPhoto} />
+      { props.isOwner &&  
+      // <input type="file" onChange={onMainPhotoSelected}/> }
+      <label htmlFor="icon-button-file">
+        <Input accept="image/*" id="icon-button-file" type="file" onChange={onMainPhotoSelected}/>
+        <IconButton color="primary" aria-label="upload picture" component="span">
+          <PhotoCamera/>
+        </IconButton>
+      </label>
+     }
+
       </div>
-      <div className={s.wrapper__info}>
+      {/* {editMode ? <ProfileDataForm profile={props.profile}/> :  */}
+      <ProfileData profile={props.profile} putProfileStatus={props.putProfileStatus} status={props.status} isOwner={props.isOwner}/>
+      {/* } */}
+    </div>
+
+  )
+}
+
+
+const ProfileDataForm = (props) => {
+  return 
+}
+const ProfileData = (props) => {
+  return <div className={s.wrapper__info}>
         <div className={s.wrapper__fullNameStatus}>
           <div className={s.fullname}>
             <h4>{props.profile.fullName}</h4>
@@ -29,12 +62,11 @@ const ProfileInfo = (props) => {
           <div className={s.wrapper__contacts}>
             Contacts:
             <ul className={s.ulContacts}>
-              <li>{props.profile.contacts.facebook ? <a href="{props.profile.contacts.facebook}">facebook</a> : "Facebooka нет =("}</li>
-              <li>{props.profile.contacts.github ? <a href="{props.profile.contacts.github}"> github</a> : 'githuba нет =('}</li>
-              <li>{props.profile.contacts.vk ? <a href='{props.profile.contacts.vk}'>vk</a> : "vk нет =("}</li>
-              <li>{props.profile.contacts.twitter ? <a href="{props.profile.contacts.twitter}">twitter</a> : "twittera нет =("}</li>
-              <li>{props.profile.contacts.instagram ? <a href="{props.profile.contacts.instagram}"> instagram</a> : "instagrama нет =("}</li>
-              <li>{props.profile.contacts.youtube ? <a href="{props.profile.contacts.youtube}">youtube</a> : "youtuba нет =("}</li>
+              {Object.keys(props.profile.contacts).map(key => {
+                return <Contact key={key} contactTitle={key}
+                contactValue={props.profile.contacts[key]} />
+              })
+              }
             </ul>
           </div>
           <div className={s.wrapper__lookingForAJob}>
@@ -46,10 +78,16 @@ const ProfileInfo = (props) => {
             </div>
           </div>
         </div>
+        <div>
+          <Button variant="contained" component="span" size='small'>
+            Edit
+          </Button>
+        </div>
       </div>
-    </div>
+}
 
-  )
+const Contact = ({contactTitle, contactValue}) => {
+  return <li>{contactValue ? <a href={contactValue}> {contactTitle}</a> : `${contactTitle} нет =(`}</li>
 }
 
 export default ProfileInfo;

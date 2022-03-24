@@ -39,8 +39,11 @@ export const getUserLogin = () => async (dispatch) => {
 
 export const signIn = (email, password, rememberMe) => async (dispatch) => {
   let response = await authAPI.signIn(email, password, rememberMe);
+
   if (response.data.resultCode === 0) {
-    dispatch(setAuthUserData());
+    let userId = response.data.data.userId;
+    let { login, email } = response.data.data;
+    dispatch(setAuthUserData(userId, login, email, true));
   } else {
     let message =
       response.data.messages.length > 0

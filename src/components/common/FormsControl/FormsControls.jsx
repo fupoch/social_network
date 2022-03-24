@@ -1,3 +1,4 @@
+import { TextField } from "@mui/material";
 import React from "react";
 import { Field } from "redux-form";
 import styles from './FormsControls.module.css'
@@ -17,7 +18,7 @@ import styles from './FormsControls.module.css'
 
 export const Textarea = (props) => {
   const {input, meta, child, ...restProps} = props;
-  return <FormControl {...props}><textarea {...input} {...restProps}/></FormControl>
+  return <FormControl {...props}><TextField fullWidth label="Введите что-то"  id="fullWidth" {...input} {...restProps}/></FormControl>
 }
 
 export const Input = (props) => {

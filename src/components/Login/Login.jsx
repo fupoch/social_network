@@ -1,58 +1,84 @@
+import { Button, Checkbox, debounce, FormControlLabel } from '@mui/material';
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom';
 import { compose } from 'redux';
-import { Field, reduxForm } from 'redux-form'
+// import { Field, reduxForm } from 'redux-form'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { signIn } from '../../redux/authReducer';
 import { required } from '../../utils/validators/validators';
 import { Input, CreateField } from '../common/FormsControl/FormsControls';
 import s from "../common/FormsControl/FormsControls.module.css"
 
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = (props) => {
+
 
   return (
-    <form onSubmit={handleSubmit}>
-        {CreateField('Email', 'email', required, Input)}
-        {CreateField('Password', 'password', required, Input, {type: 'password'})}
-        {/* {CreateField(null, 'rememberMe', required, Input, {type: "checkbox"}, "remember me")} */}
-      <div>
-        <Field component={'input'} name={'rememberMe'} type={"checkbox"}/> Remember me
-      </div>
-      {error && <div className={s.global_error}>
-        {error}
-      </div>}
-      
-      <div>
-        <button>Login</button>
-      </div>
-    </form>
+    <Formik
+        initialValues={{ email: '', password: '' }}
+        
+        onSubmit={props.onSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <div>
+            <Field type="email" name="email" />
+            <ErrorMessage name="email" component="div" />
+            </div>
+            <div>
+            <Field type="password" name="password" />
+            <ErrorMessage name="password" component="div" />
+            </div>
+            <Button  variant='outlined' type="submit" disabled={isSubmitting}>
+              Submit
+            </Button>
+            <div>
+              
+            <FormControlLabel control={<Checkbox defaultChecked />} name='rememberMe' label="Remember me" />
+            </div>
+
+          </Form>
+        )}
+      </Formik>
   )
 }
 
-const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
+
+
 
 
 const Login = (props) => {
   
+
   const onSubmit = (formData) => {
     props.signIn(formData.email, formData.password, formData.rememberMe)
+    
     }
   
-    let navigate = useNavigate()
- 
-  useEffect(() => { if (props.isAuth) {
-    return navigate('/profile/' + props.userId)
-    // <Navigate replace={'/login/'}
-    //  to={'/profile/' + props.userId}
-    //  />   
-  }}, [props.userId])
+  // let navigate = useNavigate()
+  // // useEffect(() => { 
+  // //   if (props.isAuth === true) {
+  // //   navigate('/profile/' + props.userId)
+  // //   // <Navigate replace={'/login/'}
+  // //   //  to={'/profile/' + props.userId}
+  // //   //  />   
+  // // }}, [props.isAuth])
+  
+    
+    if (props.isAuth) {
+      return <Navigate  to={"/profile/" + props.userId}/>
+    } 
    
   
+      
   return <div>
-    <h1>Login</h1>
-    <LoginReduxForm onSubmit={onSubmit}/>
-  </div>
+  <h1>Login</h1>
+  <LoginForm isAuth={props.isAuth} 
+  userId={props.userId}
+  onSubmit={onSubmit}/>
+</div>
 }
+  
 
 
 const mapStateToProps = (state) => ({

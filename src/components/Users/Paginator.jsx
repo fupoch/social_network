@@ -3,38 +3,28 @@ import s from './Users.module.css'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { createTheme,ThemeProvider } from '@mui/material/styles';
+import { green, purple } from '@mui/material/colors';
+import { TablePagination } from '@mui/material';
+// import { theme } from '../../theme/theme';
 
 
 
 
 let Paginator = (props, portionSize=10) => {
 
-  const theme = createTheme({
-    palette:{
-      standart: {
-        main: '#fff',
-      },
-      primary: {
-        main: '#fbff04',
+  // const theme = createTheme({
+  //   palette:{
+  //     standart: {
+  //       main: '#fff',
+  //     },
+  //     primary: {
+  //       main: '#fbff04',
         
-      },
-    },
-    components: {
-      // Name of the component
-      MuiPagination: {
-        styleOverrides: {
-          // Name of the slot
-          primary: {
-            // main: '#fbff04',
-            
-          },
-          input: {
-            
-          },
-        },
-      },
-    },
-  });
+  //     },
+  //   },
+   
+  // });
+
   
   
   let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -47,23 +37,20 @@ let Paginator = (props, portionSize=10) => {
   return <div>
    
     <div className={s.titleUsers}>
-    <Stack spacing={2}> 
-    <ThemeProvider theme={theme}>
+  
+    
       <Pagination 
           count={pageCount} 
           variant="outlined" 
           shape="rounded" 
           onChange={(_, num) => props.onPageChanges(num)}
-          color="primary"
-          
-        
+          color="neutral"
           />
-      </ThemeProvider>
-   
-      
-    </Stack>
+    
     </div>
+    
     </div>
+    
 }
 
 
@@ -79,5 +66,21 @@ let Paginator = (props, portionSize=10) => {
     
   // </div>
 
+  // export const theme = createTheme({
+  //   palette: {
+  //     primary: {
+  //       main: '#fbff04',
+  //     },
+  //     secondary: {
+  //       main: green[500],
+  //     },
+  //     neutral: {
+  //       light: '#757ce8',
+  //       main: '#3f50b5',
+  //       dark: '#002884',
+  //       contrastText: '#fff',
+  //     }
+  //   },
+  // });
 
 export default Paginator

@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from "react";
 import s from "./App.module.css";
 import Navbar from "./components/Navbar/Navbar";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, HashRouter } from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -16,6 +16,9 @@ import { compose } from "redux";
 import { withRouter } from "./components/Profile/WithRouter";
 import Preloader from "./components/common/preloader/Preloader";
 import store from "./redux/reduxStore";
+import { ThemeProvider } from "@emotion/react";
+import { createTheme } from "@mui/material";
+import { green } from "@mui/material/colors";
 
 // class App extends React.Component {
 //   componentDidMount() {
@@ -71,13 +74,36 @@ let AppContainer = compose(
   connect(mapStateToProps, { initializeApp })
 )(App);
 
+export const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#fbff04",
+      contrastText: "#615e5e",
+      text: "#fff",
+    },
+    secondary: {
+      main: "#fff",
+      contrastText: "#fff",
+    },
+    neutral: {
+      light: "#fff",
+      main: "#fbff04",
+      dark: "#fff",
+      contrastText: "#fff",
+      textColor: "#fff",
+    },
+  },
+});
+
 const MainApp = (props) => {
   return (
-    <BrowserRouter>
-      <Provider store={store}>
-        <AppContainer state={store.getState()} />
-      </Provider>
-    </BrowserRouter>
+    <HashRouter>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <AppContainer state={store.getState()} />
+        </Provider>
+      </ThemeProvider>
+    </HashRouter>
   );
 };
 export default MainApp;

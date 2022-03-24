@@ -1,3 +1,5 @@
+import { Button } from "@mui/material";
+import SendIcon from '@mui/icons-material/Send';
 import React from "react";
 import {Navigate} from "react-router-dom"
 import { Field,reduxForm } from "redux-form";
@@ -46,9 +48,11 @@ const AddMessageForm = (props) => {
           placeholder="Введите сообщение"/>
           
         <div className={s.buttonSend}>
-          <button >Send</button>
+        <Button onClick={props.handleSubmit} variant="contained" endIcon={<SendIcon />}>
+          Send
+        </Button>
         </div>
-        </div>
+      </div>
       
     </form>
   )
