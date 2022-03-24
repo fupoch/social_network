@@ -3,6 +3,9 @@
   height: 50px;
   box-shadow: 0 0 1px rgb(82, 78, 78);
   position: sticky;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header img {
@@ -14,4 +17,7 @@
 }
 .loginBlock {
   color: white;
+}
+.toFupochButton {
+  display: flex;
 }

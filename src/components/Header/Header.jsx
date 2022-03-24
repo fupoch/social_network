@@ -1,14 +1,24 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import s from './Header.module.css'
 
 
 const Header = (props) => {
+
+  const toFupoch = () => {
+    return 
+  }
+
   return (
     
     <header className={s.header}>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/RPC-JP_Logo.png" />
+        
+      <div className={s.toFupochButton}>
+        <NavLink to='/profile/22658'>
+        <Button variant="outlined" component="span" size='small' >FUPOCH</Button>
+        </NavLink>
+      </div>
       <div className={s.loginBlock}>
         {props.isAuth ? 
         <div>
