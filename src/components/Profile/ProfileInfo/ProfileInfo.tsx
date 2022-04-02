@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Props } from "react";
 import Preloader from "../../common/preloader/Preloader";
 import userPhoto from '../../assets/img/userPhoto.png'
 import s from './ProfileInfo.module.css'
@@ -6,11 +6,22 @@ import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import { Button, IconButton, Input } from "@mui/material";
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import styled from "@emotion/styled";
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import ProfileDataForm from "./ProfileDataForm";
+import { PhotosType, ProfileType } from "../../../types/types";
 
+type PropsType = {
+  editProfileData: (profile: ProfileType) => void 
+  savePhoto: (file: PhotosType) => void
+  isOwner: boolean
+  profile: ProfileType
+  putProfileStatus: (status: string) => void
+  status: string
+}
 
-const ProfileInfo = (props) => {
+const ProfileInfo: React.FC<PropsType> = (props: PropsType) => {
 
-// let {editMode, setEditMode} = React.setState()
+let [editMode, setEditMode] = React.useState(false)
 const Input = styled('input')({
   display: 'none',
 });
@@ -19,6 +30,16 @@ const onMainPhotoSelected = (e) => {
     props.savePhoto(e.target.files[0])
   }
 }
+const onSubmit = (formData) => {
+
+  props.editProfileData(formData).then (
+    () => {
+ setEditMode(false)
+    }
+  )
+ 
+
+  }
   return (
     <div className={s.wrapper}>
       <div className={s.wrapper__ava}>
@@ -34,18 +55,18 @@ const onMainPhotoSelected = (e) => {
      }
 
       </div>
-      {/* {editMode ? <ProfileDataForm profile={props.profile}/> :  */}
-      <ProfileData profile={props.profile} putProfileStatus={props.putProfileStatus} status={props.status} isOwner={props.isOwner}/>
-      {/* } */}
+      {editMode ? <ProfileDataForm onSubmit={onSubmit} disableEditMode={() => {setEditMode(false)}} profile={props.profile}/> : 
+      <ProfileData
+       activateEditMode={() => {setEditMode(true)}}
+       profile={props.profile} putProfileStatus={props.putProfileStatus} status={props.status} isOwner={props.isOwner}/>
+      }
     </div>
 
   )
 }
 
 
-const ProfileDataForm = (props) => {
-  return 
-}
+
 const ProfileData = (props) => {
   return <div className={s.wrapper__info}>
         <div className={s.wrapper__fullNameStatus}>
@@ -73,21 +94,23 @@ const ProfileData = (props) => {
             <div className={s.wrapper__booleanLookingForAjob}>
             {props.profile.lookingForAJob ? 'Ищу работу' : null}
             </div>
-            <div className={s.wrapper__descriptionLookingForAjob}>
+            {props.profile.lookingForAJob ? <div className={s.wrapper__descriptionLookingForAjob}>
             {props.profile.lookingForAJobDescription}
             </div>
+            :
+            null}
           </div>
         </div>
         <div>
-          <Button variant="contained" component="span" size='small'>
+          {props.isOwner && <Button onClick={props.activateEditMode} variant="contained" component="span" size='small'>
             Edit
-          </Button>
+          </Button>}
         </div>
       </div>
 }
 
 const Contact = ({contactTitle, contactValue}) => {
-  return <li>{contactValue ? <a href={contactValue}> {contactTitle}</a> : `${contactTitle} нет =(`}</li>
+  return <div>{contactValue ? <a href={contactValue}> {contactTitle}</a> : null}</div>
 }
 
 export default ProfileInfo;

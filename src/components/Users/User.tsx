@@ -2,8 +2,16 @@ import React from 'react'
 import s from './Users.module.css'
 import userPhoto from '../assets/img/userPhoto.png'
 import { NavLink } from 'react-router-dom'
+import { UserType } from '../../types/types'
+import { Button } from '@mui/material'
 
-let User = (props) => {
+type PropsType = {
+  user: UserType
+  unfollow: (userId: number) => void
+  follow: (userId: number) => void
+}
+
+let User = (props: PropsType ) => {
   return <div>
       <div className={s.wrapper}>
         <div className={s.wrapper__avaFollow}>
@@ -12,15 +20,16 @@ let User = (props) => {
               <img src={props.user.photos.small != null ? props.user.photos.small : userPhoto}/>
             </NavLink>
           </div> 
-          <div className={s.wrapper__followButton}>{props.user.followed ?  
-          <button onClick={() => {props.unfollow(props.user.id)
+          <div className={s.wrapper__followButton}>
+            {props.user.followed ?  
+          <Button variant='contained' onClick={() => {props.unfollow(props.user.id)
           }
-        }>Unfollow</button >
+        }>Unfollow</Button >
            : 
-           <button onClick={() => {
+           <Button variant='contained' onClick={() => {
               props.follow(props.user.id)
             }
-          }>Follow</button >
+          }>Follow</Button >
            }
            </div>
         </div>

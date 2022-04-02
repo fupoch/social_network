@@ -6,10 +6,6 @@ import s from './Header.module.css'
 
 const Header = (props) => {
 
-  const toFupoch = () => {
-    return 
-  }
-
   return (
     
     <header className={s.header}>
