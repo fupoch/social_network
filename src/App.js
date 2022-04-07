@@ -55,7 +55,6 @@ const App = (props) => {
   if (!props.initialized) {
     return <Preloader />;
   }
-
   return (
     <div
       className={

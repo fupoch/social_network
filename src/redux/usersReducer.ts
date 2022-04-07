@@ -99,9 +99,10 @@ toggleFollowingInProgress: (isFetching: boolean, userId: number) => ({
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
-export const getUsers = (currentPage: number, pageSize: number): ThunkType => async (dispatch, getState, ) => {
+export const getUsers = (currentPage: number, pageSize: number, term: string): ThunkType => async (dispatch, getState, ) => {
+  debugger
   dispatch(actions.toggleIsFetching(true));
-  let response = await usersAPI.getUsers(currentPage, pageSize);
+  let response = await usersAPI.getUsers(currentPage, pageSize, term);
   dispatch(actions.toggleIsFetching(false));
   dispatch(actions.setUsers(response.items));
   dispatch(actions.setTotalUsersCount(response.totalCount));

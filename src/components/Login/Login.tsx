@@ -1,18 +1,15 @@
-import { Button, Checkbox, debounce, FormControlLabel, TextField } from '@mui/material';
-import React, { useEffect } from 'react'
+import { Button, Checkbox,  FormControlLabel, TextField } from '@mui/material';
+import React from 'react'
 import { connect } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate} from 'react-router-dom';
 import { compose } from 'redux';
 // import { Field, reduxForm } from 'redux-form'
-import { Formik, Field, Form, ErrorMessage, useFormik } from 'formik'
+import {useFormik } from 'formik'
 import * as yup from 'yup';
 import { signIn } from '../../redux/authReducer';
-import { required } from '../../utils/validators/validators';
-import { Input, CreateField } from '../common/FormsControl/FormsControls';
 import s from "../common/FormsControl/FormsControls.module.css"
 import { AppStateType } from '../../redux/reduxStore';
 import { makeStyles } from '@mui/styles';
-import { flexbox } from '@mui/system';
 
 
 
@@ -26,7 +23,7 @@ type LoginFormType = {
 
 const validationSchema = yup.object({
   email: yup.string().email('Enter a valid email').required('Email is required'),
-  password: yup.string().min(6, 'Password should be of minimum 6 characters length').required('Password is required'),
+  password: yup.string().min(4, 'Password should be of minimum 4 characters length').required('Password is required'),
 });
 
 
@@ -64,10 +61,12 @@ const LoginForm: React.FC<LoginFormType> = (props: LoginFormType) => {
 
   const classes = useStyles(props);
 
+  
   return (
     <div className={classes.root__content}>
       <form onSubmit={formik.handleSubmit}>
         <div className={classes.root__input}>
+      
         <TextField
           fullWidth
           id="email"
@@ -184,11 +183,13 @@ type formDataType = {
 const Login: React.FC<PropsType> = (props: PropsType) => {
   const classes = useStyles(props);
   const onSubmit = (formData: formDataType) => {
+    debugger
     props.signIn(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
       
     if (props.isAuth) {
-      return <Navigate  to={"/profile/" + props.userId}/>
+      debugger
+      return <Navigate  to={"/profile/"+ props.userId }/>
     } 
   return <div className={classes.root}>
   <h1 style={{margin: '20px', display: 'flex', justifyContent: 'center'}}>Login</h1>

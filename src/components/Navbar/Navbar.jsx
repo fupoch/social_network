@@ -59,7 +59,7 @@ if (!props.profile) {
         </li>
         <ul className={classNames(classes.menu_links)}>
           <li className={classNames(classes.nav_link)}>
-            <NavLink to='/profile/22658'><i className={classNames(classes.icon)}><BiHomeAlt/></i>
+            <NavLink to={'/profile/' + props.userId}><i className={classNames(classes.icon)}><BiHomeAlt/></i>
               <span className={classNames(classes.text, classes.nav_text)}>Profile</span></NavLink>
           </li>
           <li className={classNames(classes.nav_link)}>

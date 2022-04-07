@@ -8,7 +8,7 @@ type GetUsersType = {
   error: string
 }
 export const usersAPI = {
-  async getUsers(currentPage: number= 1, pageSize: number = 5) {
+  async getUsers(currentPage: number= 1, pageSize: number = 5, term: string) {
     return instance
       .get<GetUsersType>(`users?page=${currentPage}&count=${pageSize}`)
       .then((response) => {
@@ -97,7 +97,9 @@ type LoginResponseType = {
 
 export const authAPI = {
   async loginDataGet() {
-    return instance.get<MeResponseType>("auth/me").then(res => res.data);
+   
+    return instance.get<MeResponseType>("auth/me").then(res => res.data
+      );
   },
   async signIn(email: string, password: string, rememberMe: boolean = false, captcha: string | null = null) {
     return instance.post<LoginResponseType>("auth/login", {

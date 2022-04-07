@@ -2,8 +2,11 @@
 import { TextField } from '@mui/material'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 
-
-const  ProfileStatusWithHooks = (props) => {
+type PropsType = {
+  putProfileStatus: (status: string) => void  
+  status: string
+}
+const  ProfileStatusWithHooks: React.FC<PropsType> = (props: PropsType) => {
   
   let [editMode, setEditMode] = useState(false)
   let [status, setStatus] = useState(props.status)
@@ -20,26 +23,22 @@ const  ProfileStatusWithHooks = (props) => {
   }
   const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
     setStatus(e.currentTarget.value );
-    
   }
 
   return (
       <>
-      {!editMode &&
-        <div>
-        <span onDoubleClick={activateEditMode} >{props.status || 'Статуса нет'}</span>
-      </div>
-      }   
-      {editMode &&
-      <div>
-         <TextField fullWidth label="Status"  onChange={onStatusChange} autoFocus={true} onBlur={deactivateEditMode}  value={status}/>
-        
-      </div>
-      
-      }
+        {!editMode &&
+          <div>
+            <span onDoubleClick={activateEditMode} >{props.status || 'Статуса нет'}</span>
+          </div>
+        }   
+        {editMode &&
+          <div>
+            <TextField fullWidth label="Status"  onChange={onStatusChange} autoFocus={true} onBlur={deactivateEditMode}  value={status}/>
+          </div>
+        }
       </>
     )
-  
 }
 
 

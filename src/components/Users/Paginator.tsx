@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import s from './Users.module.css'
+import React from 'react';
 import Pagination from '@mui/material/Pagination';
-
-
 
 type PropsType = {
   totalUsersCount: number
@@ -10,18 +7,15 @@ type PropsType = {
   onPageChanges: (PageNumber:number) => void
 }
 
+const Paginator: React.FC<PropsType> = (props: PropsType, ) => {
 
-let Paginator: React.FC<PropsType> = (props: PropsType, ) => {
-
-  let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
-
-  let pages: Array<number> = [];
+  const pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
+  const pages: Array<number> = [];
   for (let i=1; i <= pageCount; i++) {
     pages.push(i)
   }
 
   return <div>
-    <div className={s.titleUsers}>
       <Pagination 
           count={pageCount} 
           variant="outlined" 
@@ -29,7 +23,6 @@ let Paginator: React.FC<PropsType> = (props: PropsType, ) => {
           onChange={(_, num) => props.onPageChanges(num)}
           color="primary"
           />
-    </div>
   </div> 
 }
 

@@ -25,7 +25,7 @@ let initialState  = {
   isAuth: false,
   captchaUrl: null as string | null,
   photos:  null as PhotosType | null,
-  toggleClass: false,
+  toggleClass: true,
   toggleDarkMode: false
 };
 
@@ -105,7 +105,6 @@ export const getPhotos = (userId: number): ThunkType => async (dispatch) => {
 
 export const getUserLogin = (): ThunkType => async (dispatch) => {
   let meData = await authAPI.loginDataGet();
-  
   if (meData.resultCode === ResultCodesEnum.Success) {
     let { id, login, email } = meData.data;
     dispatch(actions.setAuthUserData(id, login, email, true));
@@ -115,10 +114,13 @@ export const getUserLogin = (): ThunkType => async (dispatch) => {
 };
 
 export const signIn =
-  (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => async (dispatch) => {
+  (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => async (dispatch) => 
+  {
     let loginData = await authAPI.signIn(email, password, rememberMe, captcha);
+    debugger
     if (loginData.resultCode === ResultCodesEnum.Success) {
-      dispatch(getUserLogin());
+      debugger
+      await dispatch(getUserLogin());
 
     } else {
       if (loginData.resultCode === ResultCodesEnumWithCaptcha.CaptchaIsRequired) {

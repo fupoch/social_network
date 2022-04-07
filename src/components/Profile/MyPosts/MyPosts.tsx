@@ -1,23 +1,31 @@
 import { Button, TextField } from "@mui/material";
 import { Field, Form, Formik, useFormik } from "formik";
 import React from "react";
+import { PostsType, ProfileType } from "../../../types/types";
 // import { Field, reduxForm } from "redux-form";
 import { maxLengthCreator, required } from "../../../utils/validators/validators";
 import { Textarea } from "../../common/FormsControl/FormsControls";
 import s from './MyPosts.module.css'
 import Post from "./Posts/Post";
 
+type PropsType = {
+  profile: ProfileType
+  newPostText: string
+  posts: Array<PostsType>
+  addPost: (newPostBody: string)  => void
+}
 
-
-const MyPosts = (props) => {
+const MyPosts: React.FC<PropsType> = (props: PropsType) => {
  
   let postsElement = props.posts.map(p => <Post profile={props.profile} key={p.id} message={p.message} likeCount={p.likeCount}/>).reverse()
- 
-  let addPost = (values) => {
+
+ type ValuesType = {
+  newPostText: string
+ }
+  let addPost = (values: ValuesType) => {
     props.addPost(values.newPostText)
   }
-  
-  
+ 
   return (
     <div className={s.postsBlock}>
       <h3>My post </h3>
@@ -70,8 +78,10 @@ const AddPostForm = (props) => {
         </Formik>
   )
 }
-
-const WithMaterialUI = (props) => {
+type TypeWithMUIProps = {
+  addPost: (newPostBody: string)  => void
+}
+const WithMaterialUI = (props: TypeWithMUIProps) => {
   const formik = useFormik({
     initialValues: {
       newPostText: '',

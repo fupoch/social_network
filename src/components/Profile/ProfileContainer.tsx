@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { withRouter } from "./WithRouter";
 import Profile from "./Profile";
 import { connect } from "react-redux";
-import { addPostActionCreator, getProfile, getProfileStatus, putProfileStatus, savePhoto, editProfileData, actions} from '../../redux/profileReducer'
+import {  getProfile, getProfileStatus, putProfileStatus, savePhoto, editProfileData, actions} from '../../redux/profileReducer'
 import { withAuthRedirect } from "../../hoc/WithAuthNavigate";
 import { compose } from "redux";
 import { PhotosType, PostsType, ProfileType } from "../../types/types";
@@ -47,36 +47,20 @@ const ProfileContainer: React.FC<PropsType> = (props: PropsType) => {
     } 
   }, [props.isAuth])
 
-  // componentDidMount() { 
-  //  let userId = props.params.userId
-  //  if (!userId) {
-  //    userId = authorizedUserId
-  //  }
-  //  props.getProfile(userId)
-  //  props.getProfileStatus(userId)
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   if (!props.isAuth) {
-  //     props.history.push("/login")
-  //   } 
-  // }
-
-  
-        return (
+    return (
       <div >
         <Profile
-      {...props} 
-      profile={props.profile} 
-      status={props.profileStatus} 
-      putProfileStatus={props.putProfileStatus} 
-      newPostText={props.newPostBody} 
-      posts={props.posts} 
-      addPost={props.addPost}
-      isOwner={+props.params.userId === props.authorizedUserId ?  true : false}
-      savePhoto={props.savePhoto}
-      editProfileData={props.editProfileData}
-      />
+          {...props} 
+          profile={props.profile} 
+          status={props.profileStatus} 
+          putProfileStatus={props.putProfileStatus} 
+          newPostText={props.newPostBody} 
+          posts={props.posts} 
+          addPost={props.addPost}
+          isOwner={+props.params.userId === props.authorizedUserId ?  true : false}
+          savePhoto={props.savePhoto}
+          editProfileData={props.editProfileData}
+          />
      </div>
     )
   }
