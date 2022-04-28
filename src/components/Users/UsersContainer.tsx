@@ -38,18 +38,17 @@ const UsersAPIComponent: React.FC<PropsType> = (props: PropsType) => {
   } 
 
    return  <> 
-    
-    <Users 
-    totalUsersCount={props.totalUsersCount}
-    pageSize={props.pageSize}
-    onPageChanges={onPageChanges}
-    users={props.users}
-    follow={props.follow}
-    unfollow={props.unfollow}
-    isFetching = {props.isFetching }
-    getUsers={getUsers}
-    />
-  </>
+            <Users 
+              totalUsersCount={props.totalUsersCount}
+              pageSize={props.pageSize}
+              onPageChanges={onPageChanges}
+              users={props.users}
+              follow={props.follow}
+              unfollow={props.unfollow}
+              isFetching = {props.isFetching }
+              getUsers={getUsers}
+            />
+          </>
     
   };
 
